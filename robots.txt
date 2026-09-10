@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://EnimaDz007.github.io/meraki-creation/sitemap.xml
