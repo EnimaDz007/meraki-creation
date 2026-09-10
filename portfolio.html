@@ -218,28 +218,28 @@ footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-s
 
 
 <section class="sec wrap" id="brief" style="padding-top:0">
- <h2 data-i="brH">اطلب متجرك الآن — عمّر الاستمارة ✍️</h2>
- <p class="sec-sub" data-i="brSub">5 دقائق تفصلك عن متجرك — عمّرها ونتصلوا بك في أقل من ساعة بالعربون والتواتر</p>
+ <h2 data-i="brH">خلّينا نبنيو متجرك 🛒</h2>
+ <p class="sec-sub" data-i="brSub">عمّر هاد المعلومات البسيطة (5 دقائق) — ونحنا نتكلفو بكلشي: من التصميم حتى الإطلاق</p>
  <div class="brief-box">
   <div class="brief-side">
-   <h3 data-i="brSh">شنو يوقع بعد ما تعمر؟</h3>
-   <p data-i="brSp">نقراو طلبك، نتصلوا بك واتساب، نتأكدو من التفاصيل، وتبدا الخدمة.</p>
+   <h3 data-i="brSh">واش يوقع من بعد؟ 👇</h3>
+   <p data-i="brSp">بسيطة: عمّر المعلومات، نتواصلو معاك، وتخلص غير كي تشوف المتجر عجبك.</p>
    <ul>
-    <li><span class="ic">1</span><span><b data-i="brL1">نتصلوا بك</b> — خلال ساعات العمل</span></li>
-    <li><span class="ic">2</span><span><b data-i="brL2">50% عربون</b> — <span data-i="brL2b">ونبداو البناء في نفس اليوم</span></span></li>
-    <li><span class="ic">3</span><span><b data-i="brL3">7 أيام</b> — <span data-i="brL3b">ومتجرك يكون مباشر على النت</span></span></li>
-    <li><span class="ic">🛡</span><span><b data-i="brL4">عقد مكتوب</b> — <span data-i="brL4b">والموقع ملكك 100%</span></span></li>
+    <li><span class="ic">1</span><span><b data-i="brL1">نتصلوا بك واتساب</b> — باش نفهمو نشاطك مزيان</span></li>
+    <li><span class="ic">2</span><span><b data-i="brL2">50% عربون</b> — <span data-i="brL2b">ونبداو الخدمة في نفس اليوم</span></span></li>
+    <li><span class="ic">3</span><span><b data-i="brL3">بعد 7 أيام</b> — <span data-i="brL3b">المتجر ديالك على الأنترنات، تشارك الرابط وتبيع</span></span></li>
+    <li><span class="ic">🛡</span><span><b data-i="brL4">ورقة مكتوبة</b> — <span data-i="brL4b">المتجر ملكك وحدك 100%</span></span></li>
    </ul>
   </div>
   <form class="brief" id="briefForm" onsubmit="return submitBrief(event)">
    <div class="f-row">
-    <div><label data-i="blName">الاسم واللقب *</label><input id="bName" type="text" placeholder="محمد بن أحمد"></div>
-    <div><label data-i="blPhone">رقم الهاتف / واتساب *</label><input id="bPhone" type="tel" placeholder="05 XX XX XX XX" dir="ltr" style="text-align:end"></div>
+    <div><label data-i="blName">سميتك الكاملة *</label><input id="bName" type="text" placeholder="محمد بن أحمد"></div>
+    <div><label data-i="blPhone">رقم الواتساب ديالك *</label><input id="bPhone" type="tel" placeholder="05 XX XX XX XX" dir="ltr" style="text-align:end"></div>
    </div>
-   <div class="err" id="bePhone" data-i="bePhone">⚠ أدخل رقمًا صحيحًا يبدأ بـ 05، 06 أو 07 (10 أرقام)</div>
+   <div class="err" id="bePhone" data-i="bePhone">⚠ الرقم ماشي صحيح — دخّل رقم ديال 10 أرقام يبدا بـ 05 ولا 06 ولا 07</div>
    <div class="f-row">
-    <div><label data-i="blShop">اسم المحل / النشاط *</label><input id="bShop" type="text" placeholder="مثال: عالم العطور"></div>
-    <div><label data-i="blField">مجال البيع *</label>
+    <div><label data-i="blShop">شنو سميتك للمتجر؟ *</label><input id="bShop" type="text" placeholder="مثال: عالم العطور"></div>
+    <div><label data-i="blField">شنو كتبيع؟ *</label>
      <select id="bField">
       <option value="ملابس وأزياء">ملابس وأزياء</option>
       <option value="عطور وتجميل">عطور وتجميل</option>
@@ -252,17 +252,17 @@ footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-s
     </div>
    </div>
    <div class="f-row">
-    <div><label data-i="blNprod">عدد المنتجات تقريبًا</label>
+    <div><label data-i="blNprod">شحال من منتج عندك تقريبًا؟</label>
      <select id="bNprod"><option>1 إلى 5</option><option>6 إلى 10</option><option>أكثر من 10</option></select>
     </div>
-    <div><label data-i="blPack">الباقة المطلوبة *</label>
+    <div><label data-i="blPack">ختار الباقة اللي تعجبك *</label>
      <select id="bPack"><option value="الانطلاقة — 15,000 دج">🚀 الانطلاقة — 15,000 دج</option><option value="الاحترافية — 28,000 دج">⭐ الاحترافية — 28,000 دج</option><option value="الملكية الكاملة — 45,000 دج">🏆 الملكية الكاملة — 45,000 دج</option><option value="مو متأكد / نصحوني">مو متأكد — نصحوني</option></select>
     </div>
    </div>
-   <label data-i="blExtra">شعار؟ صور؟ تفاصيل إضافية (اختياري)</label>
+   <label data-i="blExtra">واش عندك شي حاجة تزيد؟ (اختياري — مثال: عندي الشعار، عندي الصور، نحب اللون أحمر...)</label>
    <textarea id="bExtra" placeholder="مثال: عندي الشعار وصور 3 منتجات، نحب اللون برتقالي..."></textarea>
-   <button class="submit" type="submit" data-i="brSubmit">✅ أرسل الطلب — نتصلوا بك</button>
-   <div class="form-note" data-i="brNote">🔒 معلوماتك محفوظة ولا تُستعمل إلا للتواصل بخصوص طلبك</div>
+   <button class="submit" type="submit" data-i="brSubmit">✅ صيفط الطلب — حنا نتكلفو بالباقي</button>
+   <div class="form-note" data-i="brNote">🔒 معلوماتك آمنة — ما نستعملوهاش غير باش نتواصلو معاك على طلبك</div>
   </form>
   <div class="brief-ok" id="briefOk" style="grid-column:1/-1">
    <div class="big">🎉</div>
@@ -317,13 +317,13 @@ const FR = {
  qa3:'Quels frais supplémentaires ?', aa3:'Le domaine (~15$/an chez Namecheap, à votre nom). L\'hébergement est gratuit (Netlify/GitHub). Tout le reste est sur la facture.',
  qa4:'Et si le design ne me plaît pas ?', aa4:'Deux révisions gratuites après le premier aperçu, et on ne livre pas avant votre « validé ». Acompte remboursé si le travail n\'a pas commencé.',
  qa5:'Pouvez-vous ajouter le paiement en ligne ?', aa5:'Le marché algérien est à 95% paiement à la livraison — c\'est ce qu\'on conseille. Les passerelles CIB/Edahabia sont possibles en option.',
- brH:'Commandez votre boutique — remplissez le brief ✍️', brSub:'5 minutes vous séparent de votre boutique — remplissez, on vous appelle en moins d\'une heure pour l\'acompte',
- brSh:'Que se passe-t-il après ?', brSp:'On lit votre demande, on vous contacte sur WhatsApp, on confirme les détails, et le travail commence.',
+ brH:'Créons votre boutique ensemble 🛒', brSub:'Remplissez ces informations simples (5 minutes) — on s\'occupe de tout : du design au lancement',
+ brSh:'Et ensuite ? 👇', brSp:'On lit votre demande, on vous contacte sur WhatsApp, on confirme les détails, et le travail commence.',
  brL1:'On vous appelle', brL2:'50% d\'acompte', brL2b:' et on construit le jour même', brL3:'7 jours', brL3b:' et votre boutique est en ligne',
  brL1b:'On vous appelle', brL2:'50% d\'acompte', brL2b:' — on construit le jour même', brL3:'7 jours', brL3b:' et votre boutique est en ligne', brL4:'Contrat écrit', brL4b:' — le site est à vous 100%',
- blName:'Nom et prénom *', blPhone:'Téléphone / WhatsApp *', blShop:'Nom de la boutique *', blField:'Secteur *',
- blNprod:'Nombre de produits (approx.)', blPack:'Formule choisie *', blExtra:'Logo ? Photos ? Détails (optionnel)',
- brSubmit:'✅ Envoyer ma demande', brNote:'🔒 Vos données servent uniquement à vous recontacter',
+ blName:'Votre nom complet *', blPhone:'Votre numéro WhatsApp *', blShop:'Le nom de votre boutique ? *', blField:'Que vendez-vous ? *',
+ blNprod:'Combien de produits environ ?', blPack:'Choisissez votre formule *', blExtra:'Autre chose à ajouter ? (optionnel — ex : j\'ai le logo, j\'ai les photos…)',
+ brSubmit:'✅ Envoyer — on s\'occupe du reste', brNote:'🔒 Vos données restent privées — uniquement pour vous recontacter',
  bePhone:'⚠ Entrez un numéro valide (05, 06 ou 07 — 10 chiffres)',
  brOkH:'Demande reçue !',
  ft:'Agence e-commerce · Algérie', ft2:'50% acompte · 50% livraison · contrat écrit pour chaque projet',
@@ -380,8 +380,16 @@ function submitBrief(e){
   document.getElementById('briefForm').style.display = 'none';
   document.getElementById('briefOk').style.display = 'block';
   document.getElementById('briefOkP').innerHTML = lang==='ar'
-    ? 'طلبك: <b>'+brief.pack+'</b><br>راسلنا كي فتحت واتساب — ضغط "إرسال" باش يوصلنا كلشي، ونتصلوا بك قريب 👌'
-    : 'Votre demande : <b>'+brief.pack+'</b><br>WhatsApp s\'est ouvert — appuyez sur « envoyer » pour nous transmettre tout, on vous contacte vite 👌';
+    ? '<b style="color:var(--txt)">✅ معلوماتك وصلتنا!</b><br><br>'
+      +'📢 <b>الخطوة 1:</b> غادي تنفتح ليك واتساب — ضغط <b>« إرسال »</b> باش توصلنا المعلومات<br>'
+      +'📞 <b>الخطوة 2:</b> نتواصلو معاك في أقرب وقت ونشرحو لك كلشي بالتفصيل<br>'
+      +'🚀 <b>الخطوة 3:</b> نبداو الخدمة — ومتجرك يكون مباشر في <b>7 أيام</b><br><br>'
+      +'💎 الباقة اللي خترتها: <b>'+brief.pack+'</b>'
+    : '<b style="color:var(--txt)">✅ Informations reçues !</b><br><br>'
+      +'📢 <b>Étape 1 :</b> WhatsApp va s\'ouvrir — appuyez sur <b>« envoyer »</b> pour nous transmettre le tout<br>'
+      +'📞 <b>Étape 2 :</b> on vous contacte au plus vite pour tout expliquer<br>'
+      +'🚀 <b>Étape 3 :</b> on démarre — votre boutique en ligne dans <b>7 jours</b><br><br>'
+      +'💎 Formule choisie : <b>'+brief.pack+'</b>';
   document.getElementById('briefOk').scrollIntoView({behavior:'smooth'});
   return false;
 }
