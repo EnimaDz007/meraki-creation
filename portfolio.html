@@ -268,11 +268,15 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
     </div>
     <div class="f-row">
       <div><label data-i="blNprod">شحال من منتج عندك تقريبًا؟</label>
-       <select id="bNprod"><option>1 إلى 5</option><option>6 إلى 10</option><option>أكثر من 10</option></select>
+       <select id="bNprod" onchange="nMoreShow()"><option>1 إلى 5</option><option>6 إلى 10</option><option value="more">أكثر من 10 ✍️ (دخّل العدد)</option></select>
       </div>
       <div><label data-i="blPack">الباقة اللي خترتها *</label>
        <select id="bPack"><option value="1">🚀 الانطلاقة — 15,000 دج</option><option value="2" selected>⭐ الاحترافية — 28,000 دج</option><option value="3">🏆 الملكية الكاملة — 45,000 دج</option><option value="0">مو متأكد — نصحوني</option></select>
       </div>
+    </div>
+    <div id="nMore" style="display:none">
+      <label data-i="blNmore">كتب عدد المنتجات بالضبط ✍️</label>
+      <input id="bNcustom" type="number" min="11" inputmode="numeric" placeholder="مثال: 25">
     </div>
     <label data-i="blExtra">واش عندك شي حاجة تزيد؟ (اختياري — مثال: عندي الشعار، عندي الصور، نحب اللون أحمر...)</label>
     <textarea id="bExtra" placeholder="اكتب هنا..."></textarea>
@@ -372,6 +376,15 @@ document.getElementById('bPack').addEventListener('change', function(){
   document.querySelectorAll('.offer').forEach(o => o.classList.toggle('sel', +o.dataset.off === curPack));
   updateSum();
 });
+function nMoreShow(){
+  document.getElementById('nMore').style.display = document.getElementById('bNprod').value === 'more' ? 'block' : 'none';
+}
+function productsLabel(){
+  const v = document.getElementById('bNprod').value;
+  if(v !== 'more') return v;
+  const n = parseInt(document.getElementById('bNcustom').value, 10);
+  return (langFR() ? 'Plus de 10' : 'أكثر من 10') + (n ? ' — ' + '\u2066' + n + '\u2069' : '');
+}
 
 /* brief submit */
 const BRIEF_WEBHOOK = '';
@@ -387,7 +400,7 @@ function submitBrief(e){
   if(!okPhone) return false;
   lastBrief = { name, phone, shop,
     field: document.getElementById('bField').value,
-    products: document.getElementById('bNprod').value,
+    products: productsLabel(),
     packAr: PACKS[curPack].ar, packFr: PACKS[curPack].fr, packPrice: PACKS[curPack].price,
     extra: document.getElementById('bExtra').value.trim(),
     date: new Date().toISOString() };
@@ -458,6 +471,7 @@ const FR = {
  zoneHint:'Paiement : 50% acompte · 50% à la livraison — tout est écrit dans le contrat',
  blName:'Votre nom complet *', blPhone:'Votre numéro WhatsApp *', blShop:'Le nom de votre boutique ? *', blField:'Que vendez-vous ? *',
  blNprod:'Combien de produits environ ?', blPack:'Formule choisie *',
+ blNmore:'Écrivez le nombre exact de produits ✍️',
  blExtra:'Autre chose à ajouter ? (optionnel — ex : j\'ai le logo, j\'ai les photos…)',
  brSubmit:'✅ Envoyer — on s\'occupe du reste', brNote:'🔒 Vos données restent privées — uniquement pour vous recontacter',
  bePhone:'⚠ Numéro invalide — entrez 10 chiffres commençant par 05, 06 ou 07',
@@ -491,6 +505,8 @@ function setLang(l){
   document.documentElement.lang = l;
   document.documentElement.dir = (l === 'ar') ? 'rtl' : 'ltr';
   document.getElementById('langBtn').textContent = (l === 'ar') ? 'Français' : 'العربية';
+  document.querySelector('#bNprod option[value="more"]').textContent = (l === 'fr') ? 'Plus de 10 ✍️ (préciser)' : 'أكثر من 10 ✍️ (دخّل العدد)';
+  document.getElementById('bNcustom').placeholder = (l === 'fr') ? 'ex : 25' : 'مثال: 25';
   updateSum();
   renderOk();
 }
