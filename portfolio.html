@@ -93,6 +93,12 @@ label{display:block;font-size:.86rem;color:var(--muted);margin:0 0 6px;font-weig
 input,select,textarea{width:100%;background:var(--navy);border:1.5px solid var(--line);border-radius:12px;color:var(--txt);padding:12px 14px;font-size:1rem;outline:none;margin-bottom:16px}
 input:focus,select:focus,textarea:focus{border-color:var(--accent2)}
 textarea{min-height:74px;font-family:inherit;resize:vertical}
+.addons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.addon{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--navy);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;margin-bottom:0;font-size:.92rem;font-weight:400;color:var(--txt);transition:.15s}
+.addon:hover{border-color:var(--accent2)}
+.addon input{width:auto;margin:0;accent-color:var(--accent);flex-shrink:0}
+.addon i{font-style:normal;color:var(--accent2);font-weight:800;white-space:nowrap}
+@media(max-width:900px){.addons{grid-template-columns:1fr}}
 .submit{width:100%;background:linear-gradient(135deg,#0e63d0,#3b8bff);color:#fff;border:none;border-radius:14px;padding:16px;font-size:1.12rem;font-weight:900;cursor:pointer;box-shadow:0 10px 28px rgba(14,99,208,.35)}
 .submit:hover{filter:brightness(1.1)}
 .form-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:10px}
@@ -242,6 +248,8 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
     <div class="sum-line"><span>🛡</span><span><b data-i="brL4">ورقة مكتوبة</b> — <span data-i="brL4b">المتجر ملكك وحدك 100%</span></span></div>
     <div class="sum-line total"><span data-i="slP">الباقة المختارة</span><span id="sumPackName">—</span></div>
     <div class="sum-line"><span data-i="slPrice">سعر الباقة</span><span id="sumPrice">—</span></div>
+    <div class="sum-line"><span data-i="slExtra">خدمات إضافية (اختياري)</span><span id="sumExtra">—</span></div>
+    <div class="sum-line total"><span data-i="slTotal">المجموع</span><span id="sumTotal">—</span></div>
     <div class="sum-line"><span data-i="slHalf">العربون عند الاتفاق (50%)</span><span id="sumHalf">—</span></div>
     <div class="gift" data-i="gift">🎁 هدية: مع كل باقة، تدريب كامل على تعديل الأسعار والمنتجات بنفسك!</div>
     <div class="hint" data-i="zoneHint">الدفع: 50% عربون · 50% عند التسليم — كل شيء موثق في عقد مكتوب</div>
@@ -255,16 +263,20 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
     <div class="f-row">
       <div><label data-i="blShop">شنو سميتك للمتجر؟ *</label><input id="bShop" type="text" placeholder="مثال: عالم العطور"></div>
       <div><label data-i="blField">شنو كتبيع؟ *</label>
-       <select id="bField">
+       <select id="bField" onchange="fMoreShow()">
         <option value="ملابس وأزياء">ملابس وأزياء</option>
         <option value="عطور وتجميل">عطور وتجميل</option>
         <option value="إلكترونيات وهواتف">إلكترونيات وهواتف</option>
         <option value="ألعاب وجيمنق">ألعاب وجيمنق</option>
         <option value="منتجات أطفال">منتجات أطفال</option>
         <option value="مستلزمات منزلية">مستلزمات منزلية</option>
-        <option value="أخرى">أخرى</option>
+        <option value="أخرى">أخرى ✍️ (دخّل شنو كتبيع)</option>
        </select>
       </div>
+    </div>
+    <div id="fMore" style="display:none">
+      <label data-i="blFmore">كتب نشاطك بالضبط ✍️</label>
+      <input id="bFieldCust" type="text" placeholder="مثال: معدات رياضية ومكملات غذائية">
     </div>
     <div class="f-row">
       <div><label data-i="blNprod">شحال من منتج عندك تقريبًا؟</label>
@@ -277,6 +289,13 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-s
     <div id="nMore" style="display:none">
       <label data-i="blNmore">كتب عدد المنتجات بالضبط ✍️</label>
       <input id="bNcustom" type="number" min="11" inputmode="numeric" placeholder="مثال: 25">
+    </div>
+    <label data-i="blSrv" style="margin-bottom:10px">خدمات إضافية نقدموها — زيدها غير إذا حبيت ✨ (تخلص غير اللي تختاره)</label>
+    <div class="addons">
+      <label class="addon"><input type="checkbox" class="bx" value="3000" data-n="logo" onchange="updateSum()"><span data-i="ad1">🎨 تصميم شعار احترافي</span><i>3,000 دج</i></label>
+      <label class="addon"><input type="checkbox" class="bx" value="2000" data-n="photos" onchange="updateSum()"><span data-i="ad2">📸 تصوير منتجاتك</span><i>2,000 دج</i></label>
+      <label class="addon"><input type="checkbox" class="bx" value="2000" data-n="domain" onchange="updateSum()"><span data-i="ad3">🌍 دومين .com خاص بيك</span><i>2,000 دج</i></label>
+      <label class="addon"><input type="checkbox" class="bx" value="2500" data-n="maintenance" onchange="updateSum()"><span data-i="ad4">🔧 شهر صيانة إضافي</span><i>2,500 دج</i></label>
     </div>
     <label data-i="blExtra">واش عندك شي حاجة تزيد؟ (اختياري — مثال: عندي الشعار، عندي الصور، نحب اللون أحمر...)</label>
     <textarea id="bExtra" placeholder="اكتب هنا..."></textarea>
@@ -367,9 +386,12 @@ function pickPack(k){
 function goBrief(){ document.getElementById('brief').scrollIntoView({behavior:'smooth'}); }
 function updateSum(){
   const p = PACKS[curPack] || PACKS[2];
+  const ex = extrasSum();
   document.getElementById('sumPackName').textContent = langFR() ? p.fr : p.ar;
   document.getElementById('sumPrice').textContent = money(p.price);
-  document.getElementById('sumHalf').textContent = money(Math.round(p.price/2));
+  document.getElementById('sumExtra').textContent = ex ? money(ex) : '—';
+  document.getElementById('sumTotal').textContent = money(p.price + ex);
+  document.getElementById('sumHalf').textContent = money(Math.round((p.price + ex) / 2));
 }
 document.getElementById('bPack').addEventListener('change', function(){
   curPack = +this.value || 2;
@@ -385,6 +407,20 @@ function productsLabel(){
   const n = parseInt(document.getElementById('bNcustom').value, 10);
   return (langFR() ? 'Plus de 10' : 'أكثر من 10') + (n ? ' — ' + '\u2066' + n + '\u2069' : '');
 }
+function fMoreShow(){
+  document.getElementById('fMore').style.display = document.getElementById('bField').value === 'أخرى' ? 'block' : 'none';
+}
+function briefField(){
+  const v = document.getElementById('bField').value;
+  if(v !== 'أخرى') return v;
+  const c = document.getElementById('bFieldCust').value.trim();
+  return c || (langFR() ? 'Autre' : 'أخرى');
+}
+function extrasSum(){
+  let s = 0;
+  document.querySelectorAll('.bx:checked').forEach(b => s += parseInt(b.value, 10));
+  return s;
+}
 
 /* brief submit */
 const BRIEF_WEBHOOK = '';
@@ -399,19 +435,18 @@ function submitBrief(e){
   if(!name || !shop){ alert(lang==='ar'?'يرجى تعمير جميع الحقول الإجبارية':'Veuillez remplir tous les champs obligatoires'); return false; }
   if(!okPhone) return false;
   lastBrief = { name, phone, shop,
-    field: document.getElementById('bField').value,
+    field: briefField(),
     products: productsLabel(),
     packAr: PACKS[curPack].ar, packFr: PACKS[curPack].fr, packPrice: PACKS[curPack].price,
+    extras: Array.from(document.querySelectorAll('.bx:checked')).map(b => b.dataset.n),
+    extrasTotal: extrasSum(),
     extra: document.getElementById('bExtra').value.trim(),
     date: new Date().toISOString() };
   console.log('BRIEF:', lastBrief);
+  try { localStorage.setItem('meraki_brief_' + Date.now(), JSON.stringify(lastBrief)); } catch(err) {}
   if(BRIEF_WEBHOOK){
     fetch(BRIEF_WEBHOOK, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(lastBrief) }).catch(function(){});
   }
-  const b = lastBrief, msg = lang==='ar'
-    ? 'طلب جديد من الموقع:%0A👤 '+b.name+'%0A📞 '+b.phone+'%0A🏪 '+b.shop+'%0A🏷 '+b.field+'%0A📦 '+b.products+'%0A💼 '+b.packAr+' - '+b.packPrice+' DA'+(b.extra?'%0A📝 '+encodeURIComponent(b.extra):'')
-    : 'Nouveau brief:%0A👤 '+b.name+'%0A📞 '+b.phone+'%0A🏪 '+b.shop+'%0A🏷 '+b.field+'%0A📦 '+b.products+'%0A💼 '+b.packFr+' - '+b.packPrice+' DA'+(b.extra?'%0A📝 '+encodeURIComponent(b.extra):'');
-  window.open('https://wa.me/213780171793?text='+msg, '_blank');
   document.getElementById('briefForm').style.display = 'none';
   document.getElementById('briefOk').style.display = 'block';
   renderOk();
@@ -423,20 +458,21 @@ function renderOk(){
   const b = lastBrief, iso = s => '\u2066' + s + '\u2069';
   const pack = langFR() ? b.packFr : b.packAr;
   const cur = langFR() ? 'DA' : 'دج';
+  const exLine = b.extrasTotal ? ' + ' + (lang === 'fr' ? 'services ajoutées' : 'خدمات إضافية') : '';
   if(lang === 'fr'){
     document.getElementById('briefOkP').innerHTML =
-      '<b style="color:var(--txt)">✅ Informations reçues !</b><br><br>'
-      +'📢 <b>Étape 1 :</b> WhatsApp va s\'ouvrir — appuyez sur <b>« envoyer »</b> pour nous transmettre le tout<br>'
-      +'📞 <b>Étape 2 :</b> on vous contacte au plus vite pour tout expliquer<br>'
-      +'🚀 <b>Étape 3 :</b> on démarre — votre boutique en ligne dans <b>7 jours</b><br><br>'
-      +'💎 Formule choisie : <b>'+pack+'</b> — '+iso(b.packPrice.toLocaleString('en-US'))+' '+cur;
+      '<b style="color:var(--txt)">📋 Demande enregistrée directement depuis le formulaire — rien à retaper, rien à envoyer sur WhatsApp</b><br><br>'
+      +'📞 <b>Étape 1 :</b> on vous contacte très vite (souvent en moins d\'une heure) pour tout cadrer<br>'
+      +'💰 <b>Étape 2 :</b> 50% d\'acompte et on démarre le jour même<br>'
+      +'🚀 <b>Étape 3 :</b> après <b>7 jours</b> votre boutique est en ligne — vous la vérifiez et vous vendez<br><br>'
+      +'💎 Formule : <b>'+pack+'</b> — '+iso(b.packPrice.toLocaleString('en-US'))+' '+cur+exLine;
   } else {
     document.getElementById('briefOkP').innerHTML =
-      '<b style="color:var(--txt)">✅ معلوماتك وصلتنا!</b><br><br>'
-      +'📢 <b>الخطوة 1:</b> غادي تنفتح ليك واتساب — ضغط <b>« إرسال »</b> باش توصلنا المعلومات<br>'
-      +'📞 <b>الخطوة 2:</b> نتواصلو معاك في أقرب وقت ونشرحو لك كلشي بالتفصيل<br>'
-      +'🚀 <b>الخطوة 3:</b> نبداو الخدمة — ومتجرك يكون مباشر في <b>7 أيام</b><br><br>'
-      +'💎 الباقة اللي خترتها: <b>'+pack+'</b> — '+iso(b.packPrice.toLocaleString('en-US'))+' '+cur;
+      '<b style="color:var(--txt)">📋 طلبك تسجل عندنا مباشرة من الاستمارة — ما تحتاج تكتب والو في واتساب</b><br><br>'
+      +'📞 <b>الخطوة 1:</b> نتواصلو معاك في أقرب وقت (عادة في أقل من ساعة) باش نتفاهمو على كلشي<br>'
+      +'💰 <b>الخطوة 2:</b> 50% عربون ومنبداو الخدمة في نفس اليوم<br>'
+      +'🚀 <b>الخطوة 3:</b> بعد <b>7 أيام</b> متجرك مباشر — تشوفو عجبك وتبدا تبيع<br><br>'
+      +'💎 الباقة: <b>'+pack+'</b> — '+iso(b.packPrice.toLocaleString('en-US'))+' '+cur+exLine;
   }
 }
 
@@ -472,6 +508,10 @@ const FR = {
  blName:'Votre nom complet *', blPhone:'Votre numéro WhatsApp *', blShop:'Le nom de votre boutique ? *', blField:'Que vendez-vous ? *',
  blNprod:'Combien de produits environ ?', blPack:'Formule choisie *',
  blNmore:'Écrivez le nombre exact de produits ✍️',
+ blFmore:'Écrivez exactement ce que vous vendez ✍️',
+ blSrv:'Services ajoutées qu\'on propose — cochez seulement si ça vous intéresse ✨ (vous payez ce que vous cochez)',
+ ad1:'🎨 Design de logo pro', ad2:'📸 Photos de vos produits', ad3:'🌍 Domaine .com à votre nom', ad4:'🔧 1 mois de maintenance en plus',
+ slExtra:'Services ajoutées (option)', slTotal:'Total',
  blExtra:'Autre chose à ajouter ? (optionnel — ex : j\'ai le logo, j\'ai les photos…)',
  brSubmit:'✅ Envoyer — on s\'occupe du reste', brNote:'🔒 Vos données restent privées — uniquement pour vous recontacter',
  bePhone:'⚠ Numéro invalide — entrez 10 chiffres commençant par 05, 06 ou 07',
@@ -507,6 +547,8 @@ function setLang(l){
   document.getElementById('langBtn').textContent = (l === 'ar') ? 'Français' : 'العربية';
   document.querySelector('#bNprod option[value="more"]').textContent = (l === 'fr') ? 'Plus de 10 ✍️ (préciser)' : 'أكثر من 10 ✍️ (دخّل العدد)';
   document.getElementById('bNcustom').placeholder = (l === 'fr') ? 'ex : 25' : 'مثال: 25';
+  document.querySelector('#bField option[value="أخرى"]').textContent = (l === 'fr') ? 'Autre ✍️ (préciser)' : 'أخرى ✍️ (دخّل شنو كتبيع)';
+  document.getElementById('bFieldCust').placeholder = (l === 'fr') ? 'ex : matériel sportif et compléments' : 'مثال: معدات رياضية ومكملات غذائية';
   updateSum();
   renderOk();
 }
